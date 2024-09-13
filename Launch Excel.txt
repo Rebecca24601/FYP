@@ -1,0 +1,100 @@
+
+FUNCTION 'Launch Excel' GLOBAL
+    # Upload IS Excel file
+    Display.SelectFileDialog.SelectFile Title: $'''Please select the IS Table file''' InitialDirectory: $'''C:\\Users\\xyl21\\OneDrive\\Desktop\\FYP''' FileFilter: $'''*.xlsx''' IsTopMost: False CheckIfFileExists: False SelectedFile=> IS_File ButtonPressed=> tmpButtonPressed
+    IF tmpButtonPressed = $'''Cancel''' THEN
+        EXIT Code: 0
+    END
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: IS_File Visible: True ReadOnly: False Instance=> tmpExcelInstance
+    Excel.GetAllWorksheets Instance: tmpExcelInstance Worksheets=> tmpSheetNames
+    IF tmpSheetNames.Count > 1 THEN
+        Display.SelectFromListDialog.SelectFromList Title: $'''Select worksheet''' Message: $'''The IS Table has more than one worksheet. Please select the worksheet that has the Commission Table to be used to calculate the Commission''' List: tmpSheetNames IsTopMost: False AllowEmpty: False SelectedItem=> tmpSelectedItem SelectedIndex=> tmpSelectedIndex ButtonPressed=> tmpButtonPressed
+        IF $'''tmpButtonPressed''' = $'''Cancel''' THEN
+            EXIT Code: 0
+        END
+        Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: tmpExcelInstance Name: tmpSelectedItem
+    END
+    Excel.ReadFromExcel.ReadAllCells Instance: tmpExcelInstance ReadAsText: False FirstLineIsHeader: False RangeValue=> IS_Table_Extracted
+    Excel.CloseExcel.Close Instance: tmpExcelInstance
+    # Upload ELS Excel file
+    Display.SelectFileDialog.SelectFile Title: $'''Please select the ELS Table file''' InitialDirectory: $'''C:\\Users\\xyl21\\OneDrive\\Desktop\\FYP''' FileFilter: $'''*.xlsx''' IsTopMost: False CheckIfFileExists: False SelectedFile=> ELS_File ButtonPressed=> tmpButtonPressed
+    IF tmpButtonPressed = $'''Cancel''' THEN
+        EXIT Code: 0
+    END
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: ELS_File Visible: True ReadOnly: False Instance=> tmpExcelInstance
+    Excel.GetAllWorksheets Instance: tmpExcelInstance Worksheets=> tmpSheetNames
+    IF tmpSheetNames.Count > 1 THEN
+        Display.SelectFromListDialog.SelectFromList Title: $'''Select worksheet''' Message: $'''The ELS Table has more than one worksheet. Please select the worksheet that has the Commission Table to be used to calculate the Commission''' List: tmpSheetNames IsTopMost: False AllowEmpty: False SelectedItem=> tmpSelectedItem SelectedIndex=> tmpSelectedIndex ButtonPressed=> tmpButtonPressed
+        IF $'''tmpButtonPressed''' = $'''Cancel''' THEN
+            EXIT Code: 0
+        END
+        Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: tmpExcelInstance Name: tmpSelectedItem
+    END
+    Excel.ReadFromExcel.ReadAllCells Instance: tmpExcelInstance ReadAsText: False FirstLineIsHeader: False RangeValue=> ELS_Table_Extracted
+    Excel.CloseExcel.Close Instance: tmpExcelInstance
+    /# Upload Care Secure Excel file
+#/
+    Display.SelectFileDialog.SelectFile Title: $'''Please select the Care Secure Table file''' InitialDirectory: $'''C:\\Users\\xyl21\\OneDrive\\Desktop\\FYP''' FileFilter: $'''*.xlsx''' IsTopMost: False CheckIfFileExists: False SelectedFile=> CS_File ButtonPressed=> tmpButtonPressed
+    IF tmpButtonPressed = $'''Cancel''' THEN
+        EXIT Code: 0
+    END
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: CS_File Visible: True ReadOnly: False Instance=> tmpExcelInstance
+    Excel.GetAllWorksheets Instance: tmpExcelInstance Worksheets=> tmpSheetNames
+    IF tmpSheetNames.Count > 1 THEN
+        Display.SelectFromListDialog.SelectFromList Title: $'''Select worksheet''' Message: $'''The CS Table has more than one worksheet. Please select the worksheet that has the Commission Table to be used to calculate the Commission''' List: tmpSheetNames IsTopMost: False AllowEmpty: False SelectedItem=> tmpSelectedItem SelectedIndex=> tmpSelectedIndex ButtonPressed=> tmpButtonPressed
+        IF $'''tmpButtonPressed''' = $'''Cancel''' THEN
+            EXIT Code: 0
+        END
+        Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: tmpExcelInstance Name: tmpSelectedItem
+    END
+    Excel.ReadFromExcel.ReadAllCells Instance: tmpExcelInstance ReadAsText: False FirstLineIsHeader: False RangeValue=> CS_Table_Extracted
+    Excel.CloseExcel.Close Instance: tmpExcelInstance
+    # Upload ebao Excel file
+    Display.SelectFileDialog.SelectFile Title: $'''Please select the ebao Table file''' InitialDirectory: $'''C:\\Users\\xyl21\\OneDrive\\Desktop\\FYP''' FileFilter: $'''*.xlsx''' IsTopMost: False CheckIfFileExists: False SelectedFile=> ebao_File ButtonPressed=> tmpButtonPressed
+    IF tmpButtonPressed = $'''Cancel''' THEN
+        EXIT Code: 0
+    END
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: ebao_File Visible: True ReadOnly: False Instance=> tmpExcelInstance
+    Excel.GetAllWorksheets Instance: tmpExcelInstance Worksheets=> tmpSheetNames
+    IF tmpSheetNames.Count > 1 THEN
+        Display.SelectFromListDialog.SelectFromList Title: $'''Select worksheet''' Message: $'''The ebao Table has more than one worksheet. Please select the worksheet that has the Commission Table to be used to calculate the Commission''' List: tmpSheetNames IsTopMost: False AllowEmpty: False SelectedItem=> tmpSelectedItem SelectedIndex=> tmpSelectedIndex ButtonPressed=> tmpButtonPressed
+        IF $'''tmpButtonPressed''' = $'''Cancel''' THEN
+            EXIT Code: 0
+        END
+        Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: tmpExcelInstance Name: tmpSelectedItem
+    END
+    Excel.ReadFromExcel.ReadAllCells Instance: tmpExcelInstance ReadAsText: False FirstLineIsHeader: False RangeValue=> ebao_Table_Extracted
+    Excel.CloseExcel.Close Instance: tmpExcelInstance
+    # Upload GI_Commission Excel File
+    Display.SelectFileDialog.SelectFile Title: $'''Please select the GI_Commission Table file''' InitialDirectory: $'''C:\\Users\\xyl21\\OneDrive\\Desktop\\FYP''' FileFilter: $'''*.xlsx''' IsTopMost: False CheckIfFileExists: False SelectedFile=> GIComm_File ButtonPressed=> tmpButtonPressed
+    IF tmpButtonPressed = $'''Cancel''' THEN
+        EXIT Code: 0
+    END
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: GIComm_File Visible: True ReadOnly: False Instance=> tmpExcelInstance
+    Excel.GetAllWorksheets Instance: tmpExcelInstance Worksheets=> tmpSheetNames
+    IF tmpSheetNames.Count > 1 THEN
+        Display.SelectFromListDialog.SelectFromList Title: $'''Select worksheet''' Message: $'''The GI_commission Table has more than one worksheet. Please select the worksheet that has the Commission Table to be used to calculate the Commission''' List: tmpSheetNames IsTopMost: False AllowEmpty: False SelectedItem=> tmpSelectedItem SelectedIndex=> tmpSelectedIndex ButtonPressed=> tmpButtonPressed
+        IF $'''tmpButtonPressed''' = $'''Cancel''' THEN
+            EXIT Code: 0
+        END
+        Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: tmpExcelInstance Name: tmpSelectedItem
+    END
+    Excel.ReadFromExcel.ReadAllCells Instance: tmpExcelInstance ReadAsText: False FirstLineIsHeader: False RangeValue=> GIComm_Table_Extracted
+    Excel.CloseExcel.Close Instance: tmpExcelInstance
+    # Upload GI-SME Excel file
+    Display.SelectFileDialog.SelectFile Title: $'''Please select the GI-SME Table file''' InitialDirectory: $'''C:\\Users\\xyl21\\OneDrive\\Desktop\\FYP''' FileFilter: $'''*.xlsx''' IsTopMost: False CheckIfFileExists: False SelectedFile=> GI_SME_File ButtonPressed=> tmpButtonPressed
+    IF tmpButtonPressed = $'''Cancel''' THEN
+        EXIT Code: 0
+    END
+    Excel.LaunchExcel.LaunchAndOpenUnderExistingProcess Path: GI_SME_File Visible: True ReadOnly: False Instance=> tmpExcelInstance
+    Excel.GetAllWorksheets Instance: tmpExcelInstance Worksheets=> tmpSheetNames
+    IF tmpSheetNames.Count > 1 THEN
+        Display.SelectFromListDialog.SelectFromList Title: $'''Select worksheet''' Message: $'''The GI-SME Table has more than one worksheet. Please select the worksheet that has the Commission Table to be used to calculate the Commission''' List: tmpSheetNames IsTopMost: False AllowEmpty: False SelectedItem=> tmpSelectedItem SelectedIndex=> tmpSelectedIndex ButtonPressed=> tmpButtonPressed
+        IF $'''tmpButtonPressed''' = $'''Cancel''' THEN
+            EXIT Code: 0
+        END
+        Excel.SetActiveWorksheet.ActivateWorksheetByName Instance: tmpExcelInstance Name: tmpSelectedItem
+    END
+    Excel.ReadFromExcel.ReadAllCells Instance: tmpExcelInstance ReadAsText: False FirstLineIsHeader: False RangeValue=> GI_SME_Table_Extracted
+    Excel.CloseExcel.Close Instance: tmpExcelInstance
+END FUNCTION

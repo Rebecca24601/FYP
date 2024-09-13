@@ -1,0 +1,9 @@
+
+FUNCTION Variables GLOBAL
+    SET IS_Table_Extracted TO $'''%''%'''
+    SET ELS_Table_Extracted TO $'''%''%'''
+    SET CS_Table_Extracted TO $'''%''%'''
+    SET ebao_Table_Extracted TO $'''%''%'''
+    SET GIComm_Table_Extracted TO $'''%''%'''
+    SET GI_SME_Table_Extracted TO $'''%''%'''
+END FUNCTION
